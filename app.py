@@ -15,7 +15,8 @@ load_dotenv()
 st.set_page_config(
     page_title="Aura Tech — Company Assistant",
     page_icon="🏢",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Initialize Theme State (default: light)
@@ -129,23 +130,15 @@ else:
 # Custom CSS for clean, modern enterprise UI styling
 st.markdown(f"""
 <style>
-    /* Ensure Streamlit sidebar collapsed control chevron is always visible and accessible */
-    [data-testid="collapsedControl"] {{
+    /* Remove any hiding of Streamlit header so the sidebar expand button (>>) is always visible */
+    [data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"] {{
         display: block !important;
         visibility: visible !important;
-        position: fixed !important;
-        top: 0.75rem !important;
-        left: 0.75rem !important;
-        z-index: 99999 !important;
+        opacity: 1 !important;
     }}
-    [data-testid="collapsedControl"] button {{
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
-        border-radius: 8px !important;
-    }}
-    #MainMenu, footer {{visibility: hidden;}}
-    header [data-testid="stToolbar"] {{visibility: hidden;}}
+    /* Base Container Max Width */
     .block-container {{
-        padding-top: 1.5rem;
+        padding-top: 2rem;
         padding-bottom: 3rem;
         max-width: 950px;
     }}
@@ -200,6 +193,7 @@ st.markdown(f"""
         padding: 10px 14px !important;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
         transition: all 0.2s ease-in-out !important;
+        min-height: 44px !important;
     }}
     div[data-testid="column"] button:hover {{
         transform: translateY(-2px);
@@ -214,12 +208,56 @@ st.markdown(f"""
         line-height: 1.5;
     }}
 
-    /* Top right theme toggle button styling */
-    .theme-toggle-container button {{
-        border-radius: 20px !important;
-        padding: 4px 12px !important;
-        font-size: 0.82rem !important;
-        font-weight: 600 !important;
+    /* ======================================================== */
+    /* Mobile & Android Responsive Breakpoints (<= 768px)       */
+    /* ======================================================== */
+    @media (max-width: 768px) {{
+        .block-container {{
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+            padding-top: 1rem !important;
+            padding-bottom: 5rem !important;
+            max-width: 100% !important;
+        }}
+        .hero-banner {{
+            padding: 16px 18px !important;
+            border-radius: 12px !important;
+            margin-bottom: 16px !important;
+        }}
+        .hero-title {{
+            font-size: 1.35rem !important;
+            gap: 8px !important;
+        }}
+        .hero-subtitle {{
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
+        }}
+        /* Make 4 quick-question columns wrap smoothly into 2x2 grid on mobile */
+        div[data-testid="stHorizontalBlock"] {{
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+        }}
+        div[data-testid="column"] {{
+            flex: 1 1 45% !important;
+            min-width: 140px !important;
+        }}
+        div[data-testid="column"] button {{
+            font-size: 0.8rem !important;
+            padding: 8px 10px !important;
+            width: 100% !important;
+        }}
+        .stChatMessage {{
+            padding: 0.4rem 0.6rem !important;
+            font-size: 0.92rem !important;
+        }}
+        /* Mobile bottom safe-area & floating keyboard support */
+        [data-testid="stBottom"] {{
+            padding-bottom: env(safe-area-inset-bottom, 8px) !important;
+        }}
+        [data-testid="collapsedControl"] {{
+            top: 0.5rem !important;
+            left: 0.5rem !important;
+        }}
     }}
 
     {theme_css}
