@@ -1,0 +1,34 @@
+# Aura Technologies Inc. - Official Company Handbook & Policies
+
+## 1. Overview & Core Mission
+Aura Technologies Inc. is an enterprise cloud and AI platform provider delivering secure data infrastructure and intelligent workspace solutions. Our headquarters are located in Austin, Texas, with remote teams operating globally.
+
+## 2. Working Hours & Support Availability
+- Standard business hours are Monday through Friday, 9:00 AM to 6:00 PM EST.
+- Core collaboration hours for all remote teams are 11:00 AM to 4:00 PM EST.
+- Customer support tiers:
+  - Standard Support: Mon-Fri, 9:00 AM - 6:00 PM EST via email and ticket portal.
+  - Premium & Enterprise Support: 24/7/365 coverage for P1 critical incidents with guaranteed 15-minute response times.
+
+## 3. Remote Work & Equipment Reimbursement Policy
+- All full-time employees are eligible for hybrid or full-time remote work arrangements.
+- New full-time hires receive a one-time home office setup stipend of $1,000 upon joining.
+- In addition, an annual equipment and technology reimbursement allowance of $1,200 is provided per employee. Eligible expenses include monitors, ergonomic chairs, keyboards, headphones, and home internet upgrades. Receipts must be submitted through the internal expense portal by December 15 each year.
+
+## 4. Health, Wellness, and Benefits
+- Comprehensive Health Coverage: Aura Technologies covers 90% of medical, dental, and vision insurance premiums for employees and 75% for dependents.
+- Mental Health Benefit: Up to 12 fully covered therapy sessions per calendar year through the Modern Health network.
+- Wellness Reimbursement: $50 monthly allowance for gym memberships, fitness classes, or wellness apps.
+
+## 5. Paid Time Off (PTO) & Leave Policy
+- Vacation: 20 days of paid vacation per calendar year (accrued at 1.66 days per month). Up to 5 unused days may roll over to the following year.
+- Sick Leave: 10 days of paid sick leave per year, renewed on January 1.
+- Parental Leave: 16 weeks of 100% paid parental leave for primary and secondary caregivers following the birth or adoption of a child.
+- Company Holidays: 11 official paid federal holidays plus a company-wide winter recharge shutdown between December 25 and January 1.
+
+## 6. Information Security & Device Protocols
+- Mandatory Multi-Factor Authentication (MFA) using hardware security keys or authenticator apps for all corporate systems. SMS-based 2FA is strictly prohibited.
+- Passwords must be at least 16 characters in length and stored in the company-provided password manager (1Password).
+- Company laptops must maintain full-disk encryption (FileVault for macOS, BitLocker for Windows) enabled at all times.
+- Public Wi-Fi usage requires an active connection through the corporate VPN gateway.
+
