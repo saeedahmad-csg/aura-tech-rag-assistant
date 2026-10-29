@@ -136,6 +136,20 @@ st.markdown(f"""
         visibility: visible !important;
         opacity: 1 !important;
     }}
+
+    /* Hide the Deploy button in the top right */
+    .stDeployButton, [data-testid="stDeployButton"] {{
+        display: none !important;
+        visibility: hidden !important;
+    }}
+
+    /* In the MainMenu dropdown: keep only the Theme Selector (first child) and hide everything else */
+    ul[data-testid="main-menu-list"] > li:not(:first-child),
+    ul[data-testid="main-menu-list"] > div,
+    ul[data-testid="main-menu-list"] ~ div {{
+        display: none !important;
+    }}
+
     /* Base Container Max Width */
     .block-container {{
         padding-top: 2rem;
@@ -327,15 +341,6 @@ def initialize_knowledge_base(api_key: str, data_fingerprint: float):
     except Exception as e:
         return None, 0, str(e)
 
-
-# Top Bar with Title & Theme Switcher Button
-top_col1, top_col2 = st.columns([8, 2], vertical_alignment="center")
-
-with top_col2:
-    toggle_icon = "☀️ Light Mode" if is_dark else "🌙 Dark Mode"
-    if st.button(toggle_icon, key="theme_toggle_btn", use_container_width=True):
-        st.session_state.theme = "light" if is_dark else "dark"
-        st.rerun()
 
 # App Header Hero Card
 st.markdown("""
