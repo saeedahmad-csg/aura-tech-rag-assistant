@@ -19,262 +19,209 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Initialize Theme State (default: light)
-if "theme" not in st.session_state:
-    st.session_state.theme = "light"
-
-is_dark = st.session_state.theme == "dark"
-
-# Dynamic Theme CSS Variables & Rules
-if is_dark:
-    theme_css = """
-    /* Dark Mode Overrides */
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stAppViewBlockContainer"] {
-        background-color: #0F172A !important;
-        color: #F1F5F9 !important;
-    }
-    [data-testid="stSidebar"], [data-testid="stSidebarContent"] {
-        background-color: #1E293B !important;
-        border-right: 1px solid #334155 !important;
-    }
-    [data-testid="stSidebar"] * {
-        color: #E2E8F0 !important;
-    }
-    .hero-banner {
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%) !important;
-        border: 1px solid #334155 !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4) !important;
-    }
-    .hero-title {
-        color: #F8FAFC !important;
-    }
-    .hero-subtitle {
-        color: #94A3B8 !important;
-    }
-    .sidebar-brand-card {
-        background: #0F172A !important;
-        border: 1px solid #334155 !important;
-    }
-    .brand-title {
-        color: #F8FAFC !important;
-    }
-    div[data-testid="column"] button {
-        background: #1E293B !important;
-        border: 1px solid #334155 !important;
-        color: #E2E8F0 !important;
-    }
-    div[data-testid="column"] button:hover {
-        background: #334155 !important;
-        color: #60A5FA !important;
-        border-color: #60A5FA !important;
-    }
-    .source-box {
-        background-color: #1E293B !important;
-        border-left: 3px solid #60A5FA !important;
-        color: #E2E8F0 !important;
-    }
-    [data-testid="stChatMessage"] {
-        background-color: #1E293B !important;
-        border: 1px solid #334155 !important;
-        color: #F8FAFC !important;
-    }
-    [data-testid="stChatMessage"] * {
-        color: #F8FAFC !important;
-    }
-    div[data-testid="stExpander"] {
-        background-color: #1E293B !important;
-        border: 1px solid #334155 !important;
-        border-radius: 8px !important;
-    }
-    div[data-baseweb="base-input"], div[data-baseweb="input"], textarea {
-        background-color: #1E293B !important;
-        border-color: #334155 !important;
-        color: #F8FAFC !important;
-    }
-    [data-testid="stBottom"] > div {
-        background: transparent !important;
-    }
-    [data-testid="stSidebarCollapseButton"] button, [data-testid="collapsedControl"] button {
-        color: #F8FAFC !important;
-        background-color: #1E293B !important;
-        border: 1px solid #334155 !important;
-    }
-    """
-else:
-    theme_css = """
-    /* Light Mode Overrides */
-    .stApp, [data-testid="stAppViewContainer"] {
-        background-color: #FFFFFF !important;
-        color: #0F172A !important;
-    }
-    .hero-banner {
-        background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-    .hero-title {
-        color: #0F172A;
-    }
-    .hero-subtitle {
-        color: #475569;
-    }
-    .sidebar-brand-card {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-    }
-    .brand-title {
-        color: #0F172A;
-    }
-    """
-
-# Custom CSS for clean, modern enterprise UI styling
-st.markdown(f"""
+# Custom CSS for clean, modern enterprise UI styling (Clean Light Theme)
+st.markdown("""
 <style>
-    /* Remove any hiding of Streamlit header so the sidebar expand button (>>) is always visible */
-    [data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"] {{
+    /* Ensure Streamlit sidebar collapsed control chevron is always accessible */
+    [data-testid="stSidebarCollapsedControl"], [data-testid="collapsedControl"] {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
-    }}
+    }
 
-    /* Hide the Deploy button in the top right */
-    .stDeployButton, [data-testid="stDeployButton"] {{
+    /* Hide the Deploy button & top toolbar clutter */
+    .stDeployButton, 
+    [data-testid="stDeployButton"],
+    [data-testid="stToolbarActions"],
+    header [data-testid="stToolbar"] {
         display: none !important;
         visibility: hidden !important;
-    }}
+    }
 
-    /* In the MainMenu dropdown: keep only the Theme Selector (first child) and hide everything else */
-    ul[data-testid="main-menu-list"] > li:not(:first-child),
-    ul[data-testid="main-menu-list"] > div,
-    ul[data-testid="main-menu-list"] ~ div {{
-        display: none !important;
-    }}
+    /* Base Container Max Width & Clean Light Background */
+    body, .stApp, [data-testid="stAppViewContainer"] {
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+    }
 
-    /* Base Container Max Width */
-    .block-container {{
+    .block-container {
         padding-top: 2rem;
         padding-bottom: 3rem;
         max-width: 950px;
-    }}
+    }
 
     /* Hero Banner Card */
-    .hero-banner {{
+    .hero-banner {
+        background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+        border: 1px solid #E2E8F0;
         border-radius: 16px;
         padding: 24px 28px;
         margin-bottom: 24px;
-    }}
-    .hero-title {{
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .hero-title {
         font-size: 1.85rem;
         font-weight: 700;
+        color: #0F172A;
         display: flex;
         align-items: center;
         gap: 12px;
         margin-bottom: 6px;
-    }}
-    .hero-subtitle {{
+    }
+    .hero-subtitle {
         font-size: 0.95rem;
+        color: #475569;
         line-height: 1.5;
         margin: 0;
-    }}
+    }
 
     /* Sidebar Branding */
-    .sidebar-brand-card {{
+    [data-testid="stSidebar"], [data-testid="stSidebarContent"] {
+        background-color: #F8FAFC !important;
+        border-right: 1px solid #E2E8F0 !important;
+    }
+    .sidebar-brand-card {
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
         border-radius: 12px;
         padding: 16px;
         margin-bottom: 20px;
         text-align: center;
-    }}
-    .brand-title {{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .brand-title {
         font-weight: 700;
         font-size: 1.1rem;
+        color: #0F172A;
         margin-top: 8px;
         margin-bottom: 2px;
-    }}
+    }
 
     /* Quick question chips */
-    .quick-section-title {{
+    .quick-section-title {
         font-size: 0.85rem;
         font-weight: 600;
+        color: #64748B;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-bottom: 10px;
-        opacity: 0.75;
-    }}
-    div[data-testid="column"] button {{
+    }
+    div[data-testid="column"] button {
         border-radius: 10px !important;
+        background: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        color: #1E293B !important;
         font-size: 0.85rem !important;
         font-weight: 500 !important;
         padding: 10px 14px !important;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
         transition: all 0.2s ease-in-out !important;
         min-height: 44px !important;
-    }}
-    div[data-testid="column"] button:hover {{
+    }
+    div[data-testid="column"] button:hover {
+        border-color: #3B82F6 !important;
+        color: #1D4ED8 !important;
+        background-color: #F8FAFC !important;
         transform: translateY(-2px);
-    }}
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.1) !important;
+    }
 
-    /* Source citations styling */
-    .source-box {{
-        padding: 10px 14px;
-        margin-top: 6px;
-        border-radius: 6px;
-        font-size: 0.88rem;
-        line-height: 1.5;
-    }}
+    /* High-Contrast Chat Messages Typography (LinkedIn Ready) */
+    .stChatMessage, [data-testid="stChatMessage"] {
+        border-radius: 12px !important;
+        padding: 0.85rem 1.15rem !important;
+        margin-bottom: 0.85rem !important;
+        background-color: #F8FAFC !important;
+        border: 1px solid #CBD5E1 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+    }
+    .stChatMessage p, 
+    .stChatMessage span, 
+    .stChatMessage div, 
+    .stChatMessage li, 
+    .stChatMessage strong,
+    [data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] * {
+        color: #0F172A !important;
+        font-size: 0.96rem !important;
+        line-height: 1.6 !important;
+    }
+    .stChatMessage strong {
+        font-weight: 700 !important;
+        color: #020617 !important;
+    }
+
+    /* Crisp High-Contrast Source citations styling */
+    .source-box {
+        background-color: #F8FAFC !important;
+        border: 1px solid #CBD5E1 !important;
+        border-left: 4px solid #2563EB !important;
+        padding: 12px 16px !important;
+        margin-top: 8px !important;
+        border-radius: 8px !important;
+        font-size: 0.90rem !important;
+        color: #0F172A !important;
+        line-height: 1.6 !important;
+    }
+    .source-box * {
+        color: #0F172A !important;
+    }
+
+    /* Expander Header High Contrast */
+    [data-testid="stExpander"] {
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 10px !important;
+        background-color: #FFFFFF !important;
+    }
+    [data-testid="stExpander"] summary {
+        font-weight: 600 !important;
+        color: #0F172A !important;
+    }
 
     /* ======================================================== */
     /* Mobile & Android Responsive Breakpoints (<= 768px)       */
     /* ======================================================== */
-    @media (max-width: 768px) {{
-        .block-container {{
+    @media (max-width: 768px) {
+        .block-container {
             padding-left: 0.75rem !important;
             padding-right: 0.75rem !important;
             padding-top: 1rem !important;
             padding-bottom: 5rem !important;
             max-width: 100% !important;
-        }}
-        .hero-banner {{
+        }
+        .hero-banner {
             padding: 16px 18px !important;
             border-radius: 12px !important;
             margin-bottom: 16px !important;
-        }}
-        .hero-title {{
+        }
+        .hero-title {
             font-size: 1.35rem !important;
             gap: 8px !important;
-        }}
-        .hero-subtitle {{
+        }
+        .hero-subtitle {
             font-size: 0.85rem !important;
             line-height: 1.4 !important;
-        }}
-        /* Make 4 quick-question columns wrap smoothly into 2x2 grid on mobile */
-        div[data-testid="stHorizontalBlock"] {{
+        }
+        div[data-testid="stHorizontalBlock"] {
             flex-wrap: wrap !important;
             gap: 8px !important;
-        }}
-        div[data-testid="column"] {{
+        }
+        div[data-testid="column"] {
             flex: 1 1 45% !important;
             min-width: 140px !important;
-        }}
-        div[data-testid="column"] button {{
+        }
+        div[data-testid="column"] button {
             font-size: 0.8rem !important;
             padding: 8px 10px !important;
             width: 100% !important;
-        }}
-        .stChatMessage {{
-            padding: 0.4rem 0.6rem !important;
+        }
+        .stChatMessage {
+            padding: 0.5rem 0.75rem !important;
             font-size: 0.92rem !important;
-        }}
-        /* Mobile bottom safe-area & floating keyboard support */
-        [data-testid="stBottom"] {{
+        }
+        [data-testid="stBottom"] {
             padding-bottom: env(safe-area-inset-bottom, 8px) !important;
-        }}
-        [data-testid="collapsedControl"] {{
-            top: 0.5rem !important;
-            left: 0.5rem !important;
-        }}
-    }}
-
-    {theme_css}
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -420,8 +367,16 @@ if effective_prompt:
     with st.chat_message("user"):
         st.markdown(effective_prompt)
 
-    # Generate Assistant Response (Real-time Streaming)
+    # Generate Assistant Response (Real-time Streaming with Thinking Indicator)
     with st.chat_message("assistant"):
+        thinking_placeholder = st.empty()
+        with thinking_placeholder:
+            st.markdown("""
+            <div style="display: inline-flex; align-items: center; gap: 8px; color: #2563EB; font-weight: 500; font-size: 0.92rem; padding: 4px 8px;">
+                <span>🧠</span> <em>Thinking & searching knowledge base...</em>
+            </div>
+            """, unsafe_allow_html=True)
+
         try:
             stream_gen, source_docs = rag.stream_rag(
                 query=effective_prompt,
@@ -431,9 +386,20 @@ if effective_prompt:
                 k=3,
                 chat_history=st.session_state.messages[:-1]
             )
-            
+
+            # Define a generator that clears the thinking indicator on the very first token
+            def stream_with_thinking_cleared(generator, placeholder):
+                cleared = False
+                for token in generator:
+                    if not cleared:
+                        placeholder.empty()
+                        cleared = True
+                    yield token
+                if not cleared:
+                    placeholder.empty()
+
             # Stream response in real-time
-            answer_text = st.write_stream(stream_gen)
+            answer_text = st.write_stream(stream_with_thinking_cleared(stream_gen, thinking_placeholder))
 
             # Render sources only if the query was factual (not a greeting/pleasantry)
             is_chit_chat = any(w in effective_prompt.lower().strip() for w in ["hi", "hello", "hey", "bye", "goodbye", "thanks", "thank you"])
